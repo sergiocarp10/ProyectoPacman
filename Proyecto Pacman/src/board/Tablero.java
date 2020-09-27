@@ -20,6 +20,32 @@ public class Tablero {
 		this.matriz = new TipoCelda[MAX_SIZE][MAX_SIZE];
 	}
 	
+	
+	
+	public int getCantPuntosInicio() {
+		return cantPuntosInicio;
+	}
+
+
+
+	public void setCantPuntosInicio(int cantPuntosInicio) {
+		this.cantPuntosInicio = cantPuntosInicio;
+	}
+
+
+
+	public int getCantPuntosRestantes() {
+		return cantPuntosRestantes;
+	}
+
+
+
+	public void setCantPuntosRestantes(int cantPuntosRestantes) {
+		this.cantPuntosRestantes = cantPuntosRestantes;
+	}
+
+
+
 	/**
 	 * Carga el tablero con los tipos de celda correspondientes
 	 */
@@ -78,11 +104,13 @@ public class Tablero {
 	}
 	
 	/**
-	 * Establece una celda como libre
+	 * Establece una celda como libre y actualiza el contador de puntos restantes. 
+	 * Invocar únicamente si se verificó anteriormente que la misma tiene comida o fruta
 	 * @param x el valor de abscisas a cambiar
 	 * @param y el valor de ordenada a cambiar
 	 */
 	public void quitarPunto(int x, int y) {
 		this.matriz[x][y] = TipoCelda.LIBRE;
+		this.cantPuntosRestantes--;
 	}
 }
