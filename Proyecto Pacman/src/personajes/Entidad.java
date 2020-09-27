@@ -5,6 +5,7 @@ package personajes;
 
 import utils.NewPositionsHelper;
 import java.awt.Image;
+import board.Tablero;
 
 /**
  * Representa un objeto que puede moverse por el tablero durante la partida
@@ -12,7 +13,7 @@ import java.awt.Image;
  * @version 1
  */
 public abstract class Entidad {
-	private Posicion mPosicion;
+	private Posicion posActual;
 	private Direccion angulo;
 	private NewPositionsHelper helper;
 	private Image graficos;
@@ -24,6 +25,7 @@ public abstract class Entidad {
 	 */
 	public Entidad() {
 		this.helper = new NewPositionsHelper();
+		this.posActual = new Posicion();
 		this.resetearPosicion();
 	}
 	
@@ -32,25 +34,25 @@ public abstract class Entidad {
 	 * @param tablero la instancia del tablero utilizada por la partida y 
 	 * el resto de personajes
 	 */
-	public Entidad(board.Tablero tablero) {
+	public Entidad(Tablero tablero) {
 		this();
 		helper.referenciarTablero(tablero);
 	}
 	
 	/**
-	 * @return el valor del atributo mPosicion
+	 * @return el valor del atributo posActual
 	 */
-	public Posicion getmPosicion() {
-		return mPosicion;
+	public Posicion getPosActual() {
+		return posActual;
 	}
 
 
 
 	/**
-	 * @param mPosicion el valor del atributo mPosicion a asignar
+	 * @param posActual el valor del atributo posActual a asignar
 	 */
-	public void setmPosicion(Posicion mPosicion) {
-		this.mPosicion = mPosicion;
+	public void setPosActual(Posicion posActual) {
+		this.posActual = posActual;
 	}
 
 
@@ -132,6 +134,30 @@ public abstract class Entidad {
 	abstract void resetearPosicion();
 	
 	/**
+	 * Cambia el ángulo a la siguiente dirección en el sentido de las agujas del reloj
+	 */
+	public void girarHorario() {
+		switch (this.getAngulo()) {
+			case DOWN: {
+				this.setAngulo(Direccion.LEFT);
+				break;
+			}
+			case LEFT: {
+				this.setAngulo(Direccion.UP);
+				break;
+			}
+			case UP: {
+				this.setAngulo(Direccion.RIGHT);
+				break;
+			}
+			case RIGHT: {
+				this.setAngulo(Direccion.DOWN);
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Delega el cálculo de la siguiente posición en la dirección propuesta y efectúa
 	 * el movimiento en caso de que sea posible
 	 * @param direccion el ángulo inicial, es decir, antes de efectuar el movimiento
@@ -140,19 +166,19 @@ public abstract class Entidad {
 	 * lo gira automáticamente
 	 */
 	public boolean intentarMov(Direccion direccion) {
-		int[] vector = mPosicion.getVector();
+		int[] vector = this.getPosActual().getVector();
 		helper.getPosInmediata(vector, direccion);
 		
-		if (this.manejadoPorCPU) {
+		if (this.isManejadoPorCPU()) {
 			while (!helper.validarPosicion(vector)) {
 				this.girarHorario();
 				helper.getPosInmediata(vector, direccion);
 			}
-			mPosicion.cambiar(vector[0], vector[1]);
+			this.efectuarMov(vector);
 			return true;
 		} else {
 			if (helper.validarPosicion(vector)) {
-				mPosicion.cambiar(vector[0], vector[1]);
+				this.efectuarMov(vector);
 				return true;
 			}
 		}
@@ -160,39 +186,28 @@ public abstract class Entidad {
 		return false;
 	}
 	
+	/**
+	 * Realiza la animación de pasar por un túnel y traslada la entidad a la posición de salida
+	 * @param direccion En cuál de las 4 direcciones posibles está ingresando
+	 */
 	public void pasarPorTunel(Direccion direccion) {
-		int[] vector = mPosicion.getVector();
+		int[] vector = this.getPosActual().getVector();
 		velocidadEnMs += 10;
 		// efectuar animacion
 		helper.getPosInversa(vector, direccion);
-		mPosicion.cambiar(vector[0], vector[1]);
+		this.efectuarMov(vector);
 		velocidadEnMs -= 10;
 	}
 	
-	
 	/**
-	 * Cambia el ángulo a la siguiente dirección en el sentido de las agujas del reloj
+	 * Realiza la animación del personaje al moverse y actualiza su posición
+	 * @param nuevaPos el vector (x,y) de la nueva celda válida a avanzar
 	 */
-	public void girarHorario() {
-		switch (angulo) {
-			case DOWN: {
-				angulo = Direccion.LEFT;
-				break;
-			}
-			case LEFT: {
-				angulo = Direccion.UP;
-				break;
-			}
-			case UP: {
-				angulo = Direccion.RIGHT;
-				break;
-			}
-			case RIGHT: {
-				angulo = Direccion.DOWN;
-				break;
-			}
-		}
+	private void efectuarMov(int[] nuevaPos) {
+		this.getPosActual().cambiar(nuevaPos[0], nuevaPos[1]);
+		this.redibujar();
 	}
+	
 	
 	/**
 	 * Actualiza el gráfico de la entidad
