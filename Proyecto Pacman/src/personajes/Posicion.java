@@ -55,4 +55,12 @@ public class Posicion {
 		this.setY(y);
 	}
 	
+	/**
+	 * Método para obtener la coordenada como vector en R2
+	 * @return un arreglo con el valor de x e y
+	 */
+	public int[] getVector() {
+		return new int[] {this.getX(), this.getY()};
+	}
+	
 }

@@ -56,12 +56,11 @@ public class NewPositionsHelper {
 	}
 	
 	/**
-	 * 
-	 * @param x el valor de abscisa a consultar
-	 * @param y el valor de ordenada a consultar
+	 * Verifica mediante el tablero referenciado si la posición es válida
+	 * @param vector el par de valores (x,y) a consultar
 	 * @return si la celda calculada es transitable
 	 */
-	private boolean validarPosicion(int x, int y) {
-		return this.tabReferencia.esTransitable(x, y);
+	public boolean validarPosicion(int[] vector) {
+		return this.tabReferencia.esTransitable(vector[0], vector[1]);
 	}
 }

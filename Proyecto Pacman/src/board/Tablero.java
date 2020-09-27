@@ -1,10 +1,11 @@
 /**
- * 
+ *
  */
 package board;
 
 /**
- * 
+ * Representa el conjunto de celdas del juego, las cuales son objetos que se encuentran en 
+ * una posición fija y pueden cambiar su estado si es necesario (caso puntos y fruta).
  * @author Calderón Sergio, Ercoli Juan Martín
  * @version 1
  */
