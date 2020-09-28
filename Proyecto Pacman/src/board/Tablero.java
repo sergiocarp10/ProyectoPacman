@@ -109,9 +109,11 @@ public class Tablero {
 	 * Invocar únicamente si se verificó anteriormente que la misma tiene comida o fruta
 	 * @param x el valor de abscisas a cambiar
 	 * @param y el valor de ordenada a cambiar
+	 * @return Si se comieron todos los puntos del tablero
 	 */
-	public void quitarPunto(int x, int y) {
+	public boolean quitarPunto(int x, int y) {
 		this.matriz[x][y] = TipoCelda.LIBRE;
 		this.cantPuntosRestantes--;
+		return cantPuntosRestantes == 0;
 	}
 }

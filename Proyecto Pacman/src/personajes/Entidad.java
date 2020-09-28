@@ -215,4 +215,9 @@ public abstract class Entidad {
 	private void redibujar() {
 		// Implementación
 	}
+	
+	
+	protected NewPositionsHelper getHelper() {
+		return helper;
+	}
 }

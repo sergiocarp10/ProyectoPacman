@@ -13,7 +13,6 @@ import utils.Temporizador;
  */
 public abstract class Fantasma extends Entidad {
 	private ModoJuego modo;
-	private Temporizador timer;
 	private Posicion objetivo, esqAsignada;
 	private String nombre;
 	private int color;
@@ -36,7 +35,6 @@ public abstract class Fantasma extends Entidad {
 		super(tablero);
 		// TODO Auto-generated constructor stub
 		super.setManejadoPorCPU(true);
-		this.timer = new Temporizador();
 	}
 
 	@Override
@@ -54,20 +52,6 @@ public abstract class Fantasma extends Entidad {
 	 */
 	public void setModo(ModoJuego modo) {
 		this.modo = modo;
-	}
-
-	/**
-	 * @return el valor del atributo timer
-	 */
-	public Temporizador getTimer() {
-		return timer;
-	}
-
-	/**
-	 * @param timer el valor del atributo timer a asignar
-	 */
-	public void setTimer(Temporizador timer) {
-		this.timer = timer;
 	}
 
 	/**
@@ -149,15 +133,22 @@ public abstract class Fantasma extends Entidad {
 	}
 	
 	/**
-	 * Cambia el modo de juego a asustado y actualiza los gráficos
+	 * Cambia el modo de juego a asustado (si es posible) y actualiza los gráficos
 	 */
 	public void asustar() {
-		this.setModo(ModoJuego.ASUSTADO);
-		this.getTimer().setTiempo(10);
-		this.getTimer().iniciar();
-		// actualizar graficos
+		if (this.getModo() != ModoJuego.COMIDO)
+			this.setModo(ModoJuego.ASUSTADO);
+		// actualizar gráficos
 	}
 	
+	/**
+	 * Cambia el modo de juego a persecución (si es posible) y actualiza los gráficos
+	 */
+	public void normalizar() {
+		if (this.getModo() != ModoJuego.COMIDO)
+			this.setModo(ModoJuego.PERSECUCION);
+		// actualizar gráficos
+	}
 
 	/**
 	 * Verifica el modo del fantasma y cambia su valor si es necesario
