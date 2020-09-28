@@ -85,11 +85,11 @@ public class Pacman extends Entidad {
 	
 	/**
 	 * Decrementa en uno la cantidad de vidas actuales de PacMan
-	 * @return si hay quedan vidas disponibles
+	 * @return "true" si se acabaron las vidas (la partida debe terminar)
 	 */
 	public boolean restarVida() {
 		this.animacionPerder();
-		return (--this.vidas) > 0;
+		return (--this.vidas) == 0;
 	}
 
 	/**
