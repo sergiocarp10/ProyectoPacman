@@ -47,7 +47,7 @@ public class Pacman extends Entidad {
 	}
 
 	@Override
-	void resetearPosicion() {
+	public void resetearPosicion() {
 		// TODO Auto-generated method stub
 		super.getPosActual().cambiar(16, 20);
 		super.setAngulo(Direccion.LEFT);

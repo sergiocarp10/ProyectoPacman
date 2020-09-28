@@ -4,7 +4,6 @@
 package personajes;
 
 import board.Tablero;
-import utils.Temporizador;
 
 /**
  * Representa los comportamientos comunes de los enemigos de PacMan
@@ -38,7 +37,7 @@ public abstract class Fantasma extends Entidad {
 	}
 
 	@Override
-	abstract void resetearPosicion();
+	public abstract void resetearPosicion();
 
 	/**
 	 * @return el valor del atributo modo

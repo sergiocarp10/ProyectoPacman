@@ -131,7 +131,7 @@ public abstract class Entidad {
 	/**
 	 * Restaura la ubicación por defecto, útil cuando PacMan pierde una vida
 	 */
-	abstract void resetearPosicion();
+	public abstract void resetearPosicion();
 	
 	/**
 	 * Cambia el ángulo a la siguiente dirección en el sentido de las agujas del reloj
@@ -216,7 +216,11 @@ public abstract class Entidad {
 		// Implementación
 	}
 	
-	
+	/**
+	 * 
+	 * @return La instancia de utilidad para calcular y predecir posiciones
+	 * (sólo está permitido su uso en clases heredadas, útil para los fantasmas)
+	 */
 	protected NewPositionsHelper getHelper() {
 		return helper;
 	}

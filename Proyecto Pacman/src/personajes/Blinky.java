@@ -35,8 +35,11 @@ public class Blinky extends Fantasma {
 	
 	@Override
 	public void resetearPosicion() {
+		// TODO Auto-generated method stub
 		super.setEstaEnCasa(false);
 		super.setModo(ModoJuego.PERSECUCION);
+		super.setAngulo(Direccion.LEFT);
+		// es el único fantasma que comienza fuera de la casa
 		super.getPosActual().cambiar(14, 14);
 	}
 	

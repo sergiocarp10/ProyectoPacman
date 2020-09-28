@@ -56,6 +56,16 @@ public class NewPositionsHelper {
 	}
 	
 	/**
+	 * Calcula la n-ésima celda válida que forma parte del espacio de la casa
+	 * @param n El número índice (comenzado en 0) para elegir una de las celdas
+	 * @return Un vector (x,y) correspondiente a la casa
+	 */
+	public int[] getPosCasaSegunIndice(int n) {
+		int[] allCoords = this.tabReferencia.getEspacioCasa();
+		return new int[] {allCoords[n*2], allCoords[n*2+1]};
+	}
+	
+	/**
 	 * Verifica mediante el tablero referenciado si la posición es válida
 	 * @param vector el par de valores (x,y) a consultar
 	 * @return si la celda calculada es transitable

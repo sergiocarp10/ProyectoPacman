@@ -36,9 +36,12 @@ public class Pinky extends Fantasma {
 	
 	@Override
 	public void resetearPosicion() {
+		// TODO Auto-generated method stub
 		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
-		super.getPosActual().cambiar(15, 16);
+		super.setAngulo(Direccion.UP);
+		int[] posInicio = super.getHelper().getPosCasaSegunIndice(0);
+		super.getPosActual().cambiar(posInicio[0], posInicio[1]);
 	}
 
 	/**
@@ -46,17 +49,8 @@ public class Pinky extends Fantasma {
 	 * @param vector el par de valores (x,y) actuales de PacMan
 	 * @param direccion En cuál de las 4 direcciones posibles está avanzando PacMan
 	 */
-	public void notifyPos(int[] vector, Direccion direccion) {
-		this.predecir(vector, direccion);
-		super.cambiarObjetivo(vector[0], vector[1]);
-	}
-	
-	/**
-	 * Utiliza {@link utils.NewPositionsHelper} para calcular una celda válida de emboscada
-	 * @param vector el par de valores (x,y) actuales de PacMan
-	 * @param direccion En cuál de las 4 direcciones posibles está avanzando PacMan
-	 */
-	private void predecir(int[] vector, Direccion direccion) {
+	public void predecir(int[] vector, Direccion direccion) {
 		super.getHelper().getPosConDelta(vector, direccion, CELDAS_DELANTE);
+		super.cambiarObjetivo(vector[0], vector[1]);
 	}
 }

@@ -3,8 +3,6 @@
  */
 package personajes;
 
-import javax.management.remote.SubjectDelegationPermission;
-
 import board.Tablero;
 
 /**
@@ -36,7 +34,7 @@ public class FrutaBonus extends Entidad {
 	}
 
 	@Override
-	void resetearPosicion() {
+	public void resetearPosicion() {
 		// TODO Auto-generated method stub
 		super.getPosActual().cambiar(0, 16);
 		super.setAngulo(Direccion.RIGHT);
