@@ -14,24 +14,14 @@ import board.Tablero;
 public class Pinky extends Fantasma {
 	private static final int CELDAS_DELANTE = 4;
 	
-	/**
-	 * Constructor por defecto, sin parámetros
-	 */
 	public Pinky() {
 		// TODO Auto-generated constructor stub
-		this(null);
+		super();
 	}
 
-	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
-	 */
-	public Pinky(Tablero tablero) {
-		super(tablero);
+	public Pinky(Tablero tablero, Pacman pacman) {
+		super(tablero, pacman, 7);
 		// TODO Auto-generated constructor stub
-		super.setNombre("Pinky");
-		super.setColor(7);
 	}
 	
 	@Override
@@ -44,13 +34,10 @@ public class Pinky extends Fantasma {
 		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
 
-	/**
-	 * Realiza el cambio de objetivo a partir de la ubicación de PacMan
-	 * @param vector el par de valores (x,y) actuales de PacMan
-	 * @param direccion En cuál de las 4 direcciones posibles está avanzando PacMan
-	 */
-	public void predecir(int[] vector, Direccion direccion) {
-		super.getHelper().getPosConDelta(vector, direccion, CELDAS_DELANTE);
+	@Override
+	public void notificarPosPacman() {
+		int[] vector = super.getPacman().getPosicion().getVector();
+		super.getHelper().getPosConDelta(vector, super.getPacman().getAngulo(), CELDAS_DELANTE);
 		super.cambiarObjetivo(vector[0], vector[1]);
 	}
 }

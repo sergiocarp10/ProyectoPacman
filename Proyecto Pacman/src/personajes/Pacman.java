@@ -23,7 +23,7 @@ public class Pacman extends Entidad {
 	}
 
 	public Pacman(Tablero tablero) {
-		super(tablero);
+		super(tablero, false);
 		// TODO Auto-generated constructor stub
 		super.setManejadoPorCPU(false);
 	}

@@ -14,7 +14,7 @@ import board.Tablero;
 public class Inky extends Fantasma {
 	private static final int CELDAS_DELANTE = 2;
 	private static final int MIN_PUNTOS_SALIR = 30;
-	private Fantasma companero;
+	private Blinky blinky;
 	
 	public Inky() {
 		// TODO Auto-generated constructor stub
@@ -27,10 +27,10 @@ public class Inky extends Fantasma {
 	 * @param tablero la instancia del tablero utilizada por la partida y 
 	 * el resto de personajes
 	 */
-	public Inky(Tablero tablero, Pacman pacman, Fantasma companero) {
+	public Inky(Tablero tablero, Pacman pacman, Blinky blinky) {
 		super(tablero, pacman, 5);
 		// TODO Auto-generated constructor stub
-		this.companero = companero;
+		this.blinky = blinky;
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class Inky extends Fantasma {
 	public void notificarPosPacman() {
 		// TODO Auto-generated method stub
 		int[] posPacman = super.getPacman().getPosicion().getVector();
-		int[] posBlinky = this.companero.getPosicion().getVector();
+		int[] posBlinky = this.blinky.getPosicion().getVector();
 		super.getHelper().getPosConDelta(posPacman, super.getPacman().getAngulo(), CELDAS_DELANTE);
 		int[] vec = this.trazarVector(posPacman, posBlinky);
 		this.duplicarVector(vec);
