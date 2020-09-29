@@ -36,7 +36,7 @@ public class FrutaBonus extends Entidad {
 	@Override
 	public void resetearPosicion() {
 		// TODO Auto-generated method stub
-		super.getPosActual().cambiar(0, 16);
+		super.getPosicion().cambiar(0, 16);
 		super.setAngulo(Direccion.RIGHT);
 		super.setVelocidadEnMs(0);
 		this.setVisible(false);

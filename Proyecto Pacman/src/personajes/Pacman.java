@@ -49,7 +49,7 @@ public class Pacman extends Entidad {
 	@Override
 	public void resetearPosicion() {
 		// TODO Auto-generated method stub
-		super.getPosActual().cambiar(16, 20);
+		super.getPosicion().cambiar(16, 20);
 		super.setAngulo(Direccion.LEFT);
 		super.setVelocidadEnMs(900);
 		this.setEnMovimiento(true);

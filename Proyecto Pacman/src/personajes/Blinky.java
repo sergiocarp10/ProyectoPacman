@@ -40,7 +40,7 @@ public class Blinky extends Fantasma {
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.LEFT);
 		// es el único fantasma que comienza fuera de la casa
-		super.getPosActual().cambiar(14, 14);
+		super.getPosicion().cambiar(14, 14);
 	}
 	
 	/**

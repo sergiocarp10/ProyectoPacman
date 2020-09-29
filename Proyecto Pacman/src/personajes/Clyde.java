@@ -40,7 +40,7 @@ public class Clyde extends Fantasma {
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.UP);
 		int[] posInicio = super.getHelper().getPosCasaSegunIndice(2);
-		super.getPosActual().cambiar(posInicio[0], posInicio[1]);
+		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
 	
 	/**

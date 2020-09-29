@@ -13,7 +13,7 @@ import board.Tablero;
  * @version 1
  */
 public abstract class Entidad {
-	private Posicion posActual;
+	private Posicion posicion;
 	private Direccion angulo;
 	private NewPositionsHelper helper;
 	private Image graficos;
@@ -25,7 +25,7 @@ public abstract class Entidad {
 	 */
 	public Entidad() {
 		this.helper = new NewPositionsHelper();
-		this.posActual = new Posicion();
+		this.posicion = new Posicion();
 		this.resetearPosicion();
 	}
 	
@@ -42,8 +42,8 @@ public abstract class Entidad {
 	/**
 	 * @return el valor del atributo posActual
 	 */
-	public Posicion getPosActual() {
-		return posActual;
+	public Posicion getPosicion() {
+		return posicion;
 	}
 
 
@@ -51,8 +51,8 @@ public abstract class Entidad {
 	/**
 	 * @param posActual el valor del atributo posActual a asignar
 	 */
-	public void setPosActual(Posicion posActual) {
-		this.posActual = posActual;
+	public void setPosicion(Posicion posActual) {
+		this.posicion = posActual;
 	}
 
 
@@ -166,7 +166,7 @@ public abstract class Entidad {
 	 * lo gira automáticamente, entonces la Partida puede ignorar el resultado en dicho caso
 	 */
 	public boolean intentarMov(Direccion direccion) {
-		int[] vector = this.getPosActual().getVector();
+		int[] vector = this.getPosicion().getVector();
 		helper.getPosInmediata(vector, direccion);
 		
 		if (this.isManejadoPorCPU()) {
@@ -191,7 +191,7 @@ public abstract class Entidad {
 	 * @param direccion En cuál de las 4 direcciones posibles está ingresando
 	 */
 	public void pasarPorTunel(Direccion direccion) {
-		int[] vector = this.getPosActual().getVector();
+		int[] vector = this.getPosicion().getVector();
 		velocidadEnMs += 10;
 		// efectuar animacion
 		helper.getPosInversa(vector, direccion);
@@ -204,7 +204,7 @@ public abstract class Entidad {
 	 * @param nuevaPos el vector (x,y) de la nueva celda válida a avanzar
 	 */
 	private void efectuarMov(int[] nuevaPos) {
-		this.getPosActual().cambiar(nuevaPos[0], nuevaPos[1]);
+		this.getPosicion().cambiar(nuevaPos[0], nuevaPos[1]);
 		this.redibujar();
 	}
 	

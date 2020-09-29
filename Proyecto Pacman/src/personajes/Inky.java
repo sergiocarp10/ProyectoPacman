@@ -42,7 +42,7 @@ public class Inky extends Fantasma {
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.DOWN);
 		int[] posInicio = super.getHelper().getPosCasaSegunIndice(1);
-		super.getPosActual().cambiar(posInicio[0], posInicio[1]);
+		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
 	
 	/**
