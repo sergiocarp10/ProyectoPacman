@@ -66,6 +66,37 @@ public class NewPositionsHelper {
 	}
 	
 	/**
+	 * Realiza una resta entre el número de puntos iniciales y restantes, útil para Inky
+	 * @return El número total de puntos/bolitas comidas del tablero
+	 */
+	public int getPuntosComidos() {
+		return this.tabReferencia.getCantPuntosInicio() - this.tabReferencia.getCantPuntosRestantes();
+	}
+	
+	/**
+	 * Realiza un cociente entre el número de puntos comidos y los iniciales, útil para Clyde
+	 * @return El porcentaje (entre 0 y 100) de puntos/bolitas comidas del tablero
+	 */
+	public int getPorcentajeComido() {
+		return this.getPuntosComidos() * 100 / this.tabReferencia.getCantPuntosInicio();
+	}
+	
+	/**
+	 * Genera coordenadas aleatorias hasta encontrar una posición transitable del tablero,
+	 *  útil para Clyde y para los fantasmas cuando entran en modo asustado
+	 * @return Un vector de valores (x,y) que es válido para una entidad
+	 */
+	public int[] getRandomPosValida() {
+		int[] resultado = new int[2];
+		do {
+			resultado[0] = (int) (Math.random() * Tablero.MAX_SIZE);
+			resultado[1] = (int) (Math.random() * Tablero.MAX_SIZE);
+		} while (!this.validarPosicion(resultado));
+		
+		return resultado;
+	}
+	
+	/**
 	 * Verifica mediante el tablero referenciado si la posición es válida
 	 * @param vector el par de valores (x,y) a consultar
 	 * @return si la celda calculada es transitable

@@ -10,7 +10,7 @@ package board;
  * @version 1
  */
 public class Tablero {
-	private static final byte MAX_SIZE = 32;
+	public static final byte MAX_SIZE = 32;
 	private int cantPuntosInicio, cantPuntosRestantes;
 	private TipoCelda[][] matriz;
 	
