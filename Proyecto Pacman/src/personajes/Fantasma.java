@@ -11,42 +11,29 @@ import board.Tablero;
  * @version 1
  */
 public abstract class Fantasma extends Entidad {
-	private ModoJuego modo;
+	private ModoJuego modo = ModoJuego.PERSECUCION;
 	private Posicion objetivo, esqAsignada;
 	private Pacman pacman;
 	private int color;
-	private boolean estaEnCasa;
+	private boolean estaEnCasa = true;
 	
-	/**
-	 * Constructor por defecto, sin parámetros
-	 */
 	public Fantasma() {
 		// TODO Auto-generated constructor stub
-		this(null);
+		super();
 	}
 
 	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
-	 */
-	public Fantasma(Tablero tablero) {
-		super(tablero);
-		// TODO Auto-generated constructor stub
-		super.setManejadoPorCPU(true);
-		this.setEstaEnCasa(true);
-		this.setModo(ModoJuego.PERSECUCION);
-	}
-
-	/**
-	 * Constructor que permite referenciar el tablero y el PacMan para permitir su persecución
+	 * Constructor que permite referenciar el tablero, la entidad a perseguir y asignar un color
 	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
 	 * @param pacman La instancia del PacMan que maneja el agente/usuario
+	 * @param color El color particular (valores de 0 al 7)
 	 */
-	public Fantasma(Tablero tablero, Pacman pacman) {
-		this(tablero);
-		this.pacman = pacman;
+	public Fantasma(Tablero tablero, Pacman pacman, int color) {
+		super(tablero, true);
+		this.color = color;
 	}
+	
+	
 
 	@Override
 	public abstract void resetearPosicion();

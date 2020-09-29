@@ -13,43 +13,31 @@ import board.Tablero;
  */
 public class Blinky extends Fantasma {
 
-	/**
-	 * Constructor por defecto, sin parámetros
-	 */
 	public Blinky() {
 		// TODO Auto-generated constructor stub
-		this(null);
-	}
-
-	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
-	 */
-	public Blinky(Tablero tablero) {
-		super(tablero);
-		// TODO Auto-generated constructor stub
-		super.setNombre("Blinky");
-		super.setColor(1);
+		super();
 	}
 	
+	public Blinky(Tablero tablero, Pacman pacman) {
+		super(tablero, pacman, 1);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void resetearPosicion() {
 		// TODO Auto-generated method stub
-		super.setEstaEnCasa(false);
+		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.LEFT);
-		// es el único fantasma que comienza fuera de la casa
-		super.getPosicion().cambiar(14, 14);
+		int[] posInicio = super.getHelper().getPosCasaSegunIndice(1);
+		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
-	
-	/**
-	 * Realiza un cambio de objetivo según la posición de PacMan
-	 * @param x el valor de abscisas actual de PacMan
-	 * @param y el valor de ordenada actual de PacMan
-	 */
-	public void notifyPos(int x, int y) {
-		super.cambiarObjetivo(x, y);
+
+	@Override
+	public void notificarPosPacman() {
+		// TODO Auto-generated method stub
+		Posicion posPacman = super.getPacman().getPosicion();
+		super.cambiarObjetivo(posPacman.getX(), posPacman.getY());
 	}
 
 }

@@ -30,15 +30,16 @@ public abstract class Entidad {
 	}
 	
 	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
+	 * Constructor que permite referenciar el tablero y asignar si es entidad autómata
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 * @param manejadoPorCPU booleano que debe ser true si la CPU se encarga de moverlo por el tablero
 	 */
-	public Entidad(Tablero tablero) {
+	public Entidad(Tablero tablero, boolean manejadoPorCPU) {
 		this();
-		helper.referenciarTablero(tablero);
+		this.helper.referenciarTablero(tablero);
+		this.manejadoPorCPU = manejadoPorCPU;
 	}
-	
+
 	/**
 	 * @return el valor del atributo posicion
 	 */
