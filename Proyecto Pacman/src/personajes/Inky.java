@@ -24,8 +24,9 @@ public class Inky extends Fantasma {
 	/**
 	 * Constructor que permite referenciar el tablero, la entidad a perseguir y el 
 	 * fantasma compañero del cuál Inky usará su posición para calcular su estrategia
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 * @param pacman La instancia del PacMan que maneja el agente/usuario
+	 * @param blinky La instancia del fantasma Blinky para conocer su posición en la estrategia
 	 */
 	public Inky(Tablero tablero, Pacman pacman, Blinky blinky) {
 		super(tablero, pacman, 5);
