@@ -11,26 +11,18 @@ import board.Tablero;
  * @version 1
  */
 public class Clyde extends Fantasma {
-	private static final int MIN_PORCE = 33;
+	private static final int MIN_PORCE = 33, DELAY = 20;
+	private int movUntilNextTarget;
 	
-	/**
-	 * Constructor por defecto, sin parámetros
-	 */
 	public Clyde() {
 		// TODO Auto-generated constructor stub
-		this(null);
+		super();
 	}
 
-	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
-	 */
 	public Clyde(Tablero tablero) {
-		super(tablero);
+		super(tablero, null, 2);
 		// TODO Auto-generated constructor stub
-		super.setNombre("Clyde");
-		super.setColor(2);
+		this.movUntilNextTarget = DELAY;
 	}
 	
 	@Override
@@ -43,12 +35,24 @@ public class Clyde extends Fantasma {
 		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
 	
+	@Override
+	public void notificarPosPacman() {
+		this.verificarSalirCasa();
+		
+		// Randomizar una esquina objetivo cada ciertos pasos
+		if (--movUntilNextTarget == 0) {
+			int[] random = super.getHelper().getRandomPosValida();
+			super.cambiarObjetivo(random[0], random[1]);
+			this.movUntilNextTarget = DELAY;
+		}
+	}
+	
 	/**
 	 * Notifica al fantasma el porcentaje de puntos comidos y lo saca de la casa si es necesario
 	 * @param porce el porcentaje (entre 0 y 100) de los puntos totales comidos del tablero
 	 */
-	public void notifyPorce(int porce) {
-		if (super.isEstaEnCasa() && porce >= MIN_PORCE) {
+	private void verificarSalirCasa() {
+		if (super.isEstaEnCasa() && super.getHelper().getPorcentajeComido() >= MIN_PORCE) {
 			super.abandonarCasa();
 		}
 	}
