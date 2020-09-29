@@ -14,25 +14,23 @@ import board.Tablero;
 public class Inky extends Fantasma {
 	private static final int CELDAS_DELANTE = 2;
 	private static final int MIN_PUNTOS_SALIR = 30;
+	private Fantasma companero;
 	
-	/**
-	 * Constructor por defecto, sin parámetros
-	 */
 	public Inky() {
 		// TODO Auto-generated constructor stub
-		this(null);
+		super();
 	}
 
 	/**
-	 * Constructor que permite referenciar el tablero
+	 * Constructor que permite referenciar el tablero, la entidad a perseguir y el 
+	 * fantasma compañero del cuál Inky usará su posición para calcular su estrategia
 	 * @param tablero la instancia del tablero utilizada por la partida y 
 	 * el resto de personajes
 	 */
-	public Inky(Tablero tablero) {
-		super(tablero);
+	public Inky(Tablero tablero, Pacman pacman, Fantasma companero) {
+		super(tablero, pacman, 5);
 		// TODO Auto-generated constructor stub
-		super.setNombre("Inky");
-		super.setColor(5);
+		this.companero = companero;
 	}
 	
 	@Override
@@ -45,25 +43,26 @@ public class Inky extends Fantasma {
 		super.getPosicion().cambiar(posInicio[0], posInicio[1]);
 	}
 	
-	/**
-	 * Realiza el cambio de objetivo a partir de la información de Pacman y Blinky
-	 * @param posPacman el vector posición de PacMan
-	 * @param dirPacman en cuál de las 4 direcciones está avanzando PacMan
-	 * @param posBlinky el vector posición de Blinky
-	 */
-	public void predecir(int[] posPacman, Direccion dirPacman, int[] posBlinky) {
-		super.getHelper().getPosConDelta(posPacman, dirPacman, CELDAS_DELANTE);
-		int[] vec = this.calcularVector(posPacman, posBlinky);
+	@Override
+	public void notificarPosPacman() {
+		// TODO Auto-generated method stub
+		int[] posPacman = super.getPacman().getPosicion().getVector();
+		int[] posBlinky = this.companero.getPosicion().getVector();
+		super.getHelper().getPosConDelta(posPacman, super.getPacman().getAngulo(), CELDAS_DELANTE);
+		int[] vec = this.trazarVector(posPacman, posBlinky);
 		this.duplicarVector(vec);
 		super.cambiarObjetivo(vec[0], vec[1]);
+		
+		// Evitar dobles llamadas y aprovechar encapsulamiento
+		this.verificarSalirCasa();
 	}
 	
 	/**
 	 * Notifica al fantasma el puntaje actual y lo saca de la casa si es necesario
 	 * @param puntaje la cantidad de puntos actuales en la partida
 	 */
-	public void notifyPuntos(int puntaje) {
-		if (super.isEstaEnCasa() && puntaje >= MIN_PUNTOS_SALIR) {
+	private void verificarSalirCasa() {
+		if (super.isEstaEnCasa() && super.getHelper().getPuntosComidos() >= MIN_PUNTOS_SALIR) {
 			super.abandonarCasa();
 		}
 	}
@@ -74,7 +73,7 @@ public class Inky extends Fantasma {
 	 * @param v2 el vector de la segunda posición
 	 * @return el vector resultante de ir desde la primera hasta la segunda
 	 */
-	private int[] calcularVector(int[] v1, int[] v2) {
+	private int[] trazarVector(int[] v1, int[] v2) {
 		// implementación
 		return null;
 	}
