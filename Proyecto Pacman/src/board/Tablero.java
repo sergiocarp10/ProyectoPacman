@@ -20,31 +20,34 @@ public class Tablero {
 	public Tablero() {
 		this.matriz = new TipoCelda[MAX_SIZE][MAX_SIZE];
 	}
-	
-	
-	
+
+	/**
+	 * @return el valor del atributo cantPuntosInicio
+	 */
 	public int getCantPuntosInicio() {
 		return cantPuntosInicio;
 	}
 
-
-
+	/**
+	 * @param cantPuntosInicio el valor del atributo cantPuntosInicio a asignar
+	 */
 	public void setCantPuntosInicio(int cantPuntosInicio) {
 		this.cantPuntosInicio = cantPuntosInicio;
 	}
 
-
-
+	/**
+	 * @return el valor del atributo cantPuntosRestantes
+	 */
 	public int getCantPuntosRestantes() {
 		return cantPuntosRestantes;
 	}
-
-
-
+	
+	/**
+	 * @param cantPuntosRestantes el valor del atributo cantPuntosRestantes a asignar
+	 */
 	public void setCantPuntosRestantes(int cantPuntosRestantes) {
 		this.cantPuntosRestantes = cantPuntosRestantes;
 	}
-
 
 
 	/**
