@@ -163,7 +163,7 @@ public abstract class Entidad {
 	 * @param direccion el ángulo inicial, es decir, antes de efectuar el movimiento
 	 * @return si fue posible avanzar en dicha dirección en el caso de entidades 
 	 * manejadas por el usuario. Siempre devolverá true si lo maneja la CPU ya que 
-	 * lo gira automáticamente
+	 * lo gira automáticamente, entonces la Partida puede ignorar el resultado en dicho caso
 	 */
 	public boolean intentarMov(Direccion direccion) {
 		int[] vector = this.getPosActual().getVector();
