@@ -40,22 +40,18 @@ public abstract class Entidad {
 	}
 	
 	/**
-	 * @return el valor del atributo posActual
+	 * @return el valor del atributo posicion
 	 */
 	public Posicion getPosicion() {
 		return posicion;
 	}
 
-
-
 	/**
-	 * @param posActual el valor del atributo posActual a asignar
+	 * @param posicion el valor del atributo posicion a asignar
 	 */
-	public void setPosicion(Posicion posActual) {
-		this.posicion = posActual;
+	public void setPosicion(Posicion posicion) {
+		this.posicion = posicion;
 	}
-
-
 
 	/**
 	 * @return el valor del atributo angulo
@@ -63,8 +59,6 @@ public abstract class Entidad {
 	public Direccion getAngulo() {
 		return angulo;
 	}
-
-
 
 	/**
 	 * @param angulo el valor del atributo angulo a asignar
@@ -81,16 +75,12 @@ public abstract class Entidad {
 		return graficos;
 	}
 
-
-
 	/**
 	 * @param graficos el valor del atributo graficos a asignar
 	 */
 	public void setGraficos(Image graficos) {
 		this.graficos = graficos;
 	}
-
-
 
 	/**
 	 * @return el valor del atributo manejadoPorCPU
@@ -99,16 +89,12 @@ public abstract class Entidad {
 		return manejadoPorCPU;
 	}
 
-
-
 	/**
 	 * @param manejadoPorCPU el valor del atributo manejadoPorCPU a asignar
 	 */
 	public void setManejadoPorCPU(boolean manejadoPorCPU) {
 		this.manejadoPorCPU = manejadoPorCPU;
 	}
-
-
 
 	/**
 	 * @return el valor del atributo velocidadEnMs
@@ -117,8 +103,6 @@ public abstract class Entidad {
 		return velocidadEnMs;
 	}
 
-
-
 	/**
 	 * @param velocidadEnMs el valor del atributo velocidadEnMs a asignar
 	 */
@@ -126,10 +110,9 @@ public abstract class Entidad {
 		this.velocidadEnMs = velocidadEnMs;
 	}
 
-
-
 	/**
-	 * Restaura la ubicación por defecto, útil cuando PacMan pierde una vida
+	 * Restaura la ubicación por defecto, importante para inicializar y útil 
+	 * cuando PacMan pierde una vida
 	 */
 	public abstract void resetearPosicion();
 	
