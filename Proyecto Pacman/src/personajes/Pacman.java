@@ -22,11 +22,6 @@ public class Pacman extends Entidad {
 		this(null);
 	}
 
-	/**
-	 * Constructor que permite referenciar el tablero
-	 * @param tablero la instancia del tablero utilizada por la partida y 
-	 * el resto de personajes
-	 */
 	public Pacman(Tablero tablero) {
 		super(tablero);
 		// TODO Auto-generated constructor stub
