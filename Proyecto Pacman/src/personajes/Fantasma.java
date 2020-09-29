@@ -13,7 +13,7 @@ import board.Tablero;
 public abstract class Fantasma extends Entidad {
 	private ModoJuego modo;
 	private Posicion objetivo, esqAsignada;
-	private String nombre;
+	private Pacman pacman;
 	private int color;
 	private boolean estaEnCasa;
 	
@@ -34,6 +34,18 @@ public abstract class Fantasma extends Entidad {
 		super(tablero);
 		// TODO Auto-generated constructor stub
 		super.setManejadoPorCPU(true);
+		this.setEstaEnCasa(true);
+		this.setModo(ModoJuego.PERSECUCION);
+	}
+
+	/**
+	 * Constructor que permite referenciar el tablero y el PacMan para permitir su persecución
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 * @param pacman La instancia del PacMan que maneja el agente/usuario
+	 */
+	public Fantasma(Tablero tablero, Pacman pacman) {
+		this(tablero);
+		this.pacman = pacman;
 	}
 
 	@Override
@@ -51,48 +63,6 @@ public abstract class Fantasma extends Entidad {
 	 */
 	public void setModo(ModoJuego modo) {
 		this.modo = modo;
-	}
-
-	/**
-	 * @return el valor del atributo objetivo
-	 */
-	public Posicion getObjetivo() {
-		return objetivo;
-	}
-
-	/**
-	 * @param objetivo el valor del atributo objetivo a asignar
-	 */
-	public void setObjetivo(Posicion objetivo) {
-		this.objetivo = objetivo;
-	}
-
-	/**
-	 * @return el valor del atributo esqAsignada
-	 */
-	public Posicion getEsqAsignada() {
-		return esqAsignada;
-	}
-
-	/**
-	 * @param esqAsignada el valor del atributo esqAsignada a asignar
-	 */
-	public void setEsqAsignada(Posicion esqAsignada) {
-		this.esqAsignada = esqAsignada;
-	}
-
-	/**
-	 * @return el valor del atributo nombre
-	 */
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * @param nombre el valor del atributo nombre a asignar
-	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	/**
@@ -135,8 +105,11 @@ public abstract class Fantasma extends Entidad {
 	 * Cambia el modo de juego a asustado (si es posible) y actualiza los gráficos
 	 */
 	public void asustar() {
-		if (this.getModo() != ModoJuego.COMIDO)
+		if (this.getModo() != ModoJuego.COMIDO) {
 			this.setModo(ModoJuego.ASUSTADO);
+			int[] esqRandom = super.getHelper().getRandomPosValida();
+			this.esqAsignada.cambiar(esqRandom[0], esqRandom[1]);
+		}
 		// actualizar gráficos
 	}
 	
@@ -144,11 +117,30 @@ public abstract class Fantasma extends Entidad {
 	 * Cambia el modo de juego a persecución (si es posible) y actualiza los gráficos
 	 */
 	public void normalizar() {
-		if (this.getModo() != ModoJuego.COMIDO)
-			this.setModo(ModoJuego.PERSECUCION);
+		if (this.getModo() != ModoJuego.COMIDO) {
+			this.setModo(ModoJuego.DISPERSION);
+		}
 		// actualizar gráficos
 	}
 
+	/**
+	 * Revisa el modo de juego actual del fantasma y realiza un movimiento hacia 
+	 * el objetivo o hacia la esquina asignada según corresponda
+	 */
+	public void moverSegunModo() {
+		Posicion posBuscaLlegar;
+		
+		// A MODO DE EJEMPLO
+		if (this.getModo() == ModoJuego.ASUSTADO || this.getModo() == ModoJuego.DISPERSION) {
+			posBuscaLlegar = this.esqAsignada;
+		} else posBuscaLlegar = this.objetivo;
+		
+		// analizar hacia que direccion conviene moverse segun posBuscaLlegar
+		Direccion dirConveniente = Direccion.UP;	// a modo de ejemplo
+		super.intentarMov(dirConveniente);
+	}
+	
+	
 	/**
 	 * Verifica el modo del fantasma y cambia su valor si es necesario
 	 * @return Si el fantasma pudo ser comido. En caso falso, excepto 
@@ -167,13 +159,26 @@ public abstract class Fantasma extends Entidad {
 	}
 	
 	/**
-	 * Realiza un cambio de la posición donde el fantasma busca llegar. 
-	 * En caso de no ser válida, puede hacer uso del Helper repetidamente.
+	 * Método que los fantasmas deben sobreescribir para actuar en consecuencia
+	 * de un nuevo desplazamiento de PacMan, informado por la Partida
+	 */
+	public abstract void notificarPosPacman();
+	
+	/**
+	 * Realiza un cambio de la posición donde el fantasma busca llegar.
 	 * @param x el valor de la posible abscisa (eje X)
 	 * @param y el valor de la posible ordenada (eje Y)
 	 */
-	public void cambiarObjetivo(int x, int y) {
-		// Implementación
+	protected void cambiarObjetivo(int x, int y) {
+		this.esqAsignada.cambiar(x, y);
 	}
 	
+	/**
+	 * 
+	 * @return La instancia cargada previamente de PacMan. Los fantasmas pueden conocer
+	 * la posición y dirección del mismo a través de esta referencia.
+	 */
+	protected Pacman getPacman() {
+		return this.pacman;
+	}
 }
