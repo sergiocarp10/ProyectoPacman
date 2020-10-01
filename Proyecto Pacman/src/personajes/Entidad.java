@@ -8,7 +8,11 @@ import java.awt.Image;
 import board.Tablero;
 
 /**
- * Representa un objeto que puede moverse por el tablero durante la partida
+ * Representa un objeto que puede moverse por el tablero durante la partida, el
+ * cual tiene una {@link Posicion}, una {@link Direccion} a donde se encuentra mirando
+ * actualmente, una utilidad {@link NewPositionsHelper} para efectuar cálculos entre 
+ * celdas y comprobar posiciones válidas para avanzar, un booleano que indica si es 
+ * autómata (controlado por la CPU) o manejado por el usuario, y la velocidad.
  * @author Calderón Sergio, Ercoli Juan Martín
  * @version 1
  */

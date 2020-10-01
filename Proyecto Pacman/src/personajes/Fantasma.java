@@ -6,7 +6,11 @@ package personajes;
 import board.Tablero;
 
 /**
- * Representa los comportamientos comunes de los enemigos de PacMan
+ * Representa los comportamientos comunes de los enemigos de PacMan. Además de los 
+ * atributos heredados (posición, ángulo, velocidad), tiene un {@link ModoJuego} que 
+ * por defecto es "Persecución", una {@link Posicion} objetivo y esquina asignada, una
+ * instancia del {@link Pacman} del cual se conocerá su posición y ángulo, un color, y 
+ * un booleano que indica si está en la casa o no.
  * @author Calderón Sergio, Ercoli Juan Martín
  * @version 1
  */

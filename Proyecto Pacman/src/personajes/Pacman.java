@@ -6,7 +6,9 @@ package personajes;
 import board.Tablero;
 
 /**
- * Representa el personaje manejado por el usuario
+ * Representa el personaje manejado por el usuario. Además de los atributos heredados
+ * de entidad (posición, ángulo, etc), tiene una cantidad de vidas y un booleano que 
+ * indica si está en movimiento (esto último es para los gráficos).
  * @author Calderón Sergio, Ercoli Juan Martín
  * @version 1
  */
