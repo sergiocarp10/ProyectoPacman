@@ -14,19 +14,24 @@ import board.Tablero;
 public class Pinky extends Fantasma {
 	private static final int CELDAS_DELANTE = 4;
 	
+	/**
+	 * Constructor por defecto, sin parámetros
+	 */
 	public Pinky() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
+	/**
+	 * Constructor que permite referenciar el tablero y la entidad a perseguir
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 * @param pacman La instancia del PacMan que maneja el agente/usuario
+	 */
 	public Pinky(Tablero tablero, Pacman pacman) {
 		super(tablero, pacman, 7);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	public void resetearPosicion() {
-		// TODO Auto-generated method stub
 		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.UP);

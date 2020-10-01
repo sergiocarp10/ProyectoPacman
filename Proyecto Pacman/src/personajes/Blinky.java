@@ -13,19 +13,24 @@ import board.Tablero;
  */
 public class Blinky extends Fantasma {
 
+	/**
+	 * Constructor por defecto, sin parámetros
+	 */
 	public Blinky() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 	
+	/**
+	 * Constructor que permite referenciar el tablero y la entidad a perseguir
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 * @param pacman La instancia del PacMan que maneja el agente/usuario
+	 */
 	public Blinky(Tablero tablero, Pacman pacman) {
 		super(tablero, pacman, 1);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void resetearPosicion() {
-		// TODO Auto-generated method stub
 		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.LEFT);
@@ -35,7 +40,6 @@ public class Blinky extends Fantasma {
 
 	@Override
 	public void notificarPosPacman() {
-		// TODO Auto-generated method stub
 		Posicion posPacman = super.getPacman().getPosicion();
 		super.cambiarObjetivo(posPacman.getX(), posPacman.getY());
 	}

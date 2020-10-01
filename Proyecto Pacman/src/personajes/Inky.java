@@ -17,7 +17,6 @@ public class Inky extends Fantasma {
 	private Blinky blinky;
 	
 	public Inky() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
@@ -30,13 +29,11 @@ public class Inky extends Fantasma {
 	 */
 	public Inky(Tablero tablero, Pacman pacman, Blinky blinky) {
 		super(tablero, pacman, 5);
-		// TODO Auto-generated constructor stub
 		this.blinky = blinky;
 	}
 	
 	@Override
 	public void resetearPosicion() {
-		// TODO Auto-generated method stub
 		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.DOWN);
@@ -46,7 +43,6 @@ public class Inky extends Fantasma {
 	
 	@Override
 	public void notificarPosPacman() {
-		// TODO Auto-generated method stub
 		int[] posPacman = super.getPacman().getPosicion().getVector();
 		int[] posBlinky = this.blinky.getPosicion().getVector();
 		super.getHelper().getPosConDelta(posPacman, super.getPacman().getAngulo(), CELDAS_DELANTE);

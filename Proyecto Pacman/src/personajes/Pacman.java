@@ -18,14 +18,15 @@ public class Pacman extends Entidad {
 	 * Constructor por defecto, sin parámetros
 	 */
 	public Pacman() {
-		// TODO Auto-generated constructor stub
-		this(null);
+		super();
 	}
 
+	/**
+	 * Constructor que permite referenciar el tablero del cual se puede consultar las celdas para avanzar
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 */
 	public Pacman(Tablero tablero) {
 		super(tablero, false);
-		// TODO Auto-generated constructor stub
-		super.setManejadoPorCPU(false);
 	}
 	
 	
@@ -43,7 +44,6 @@ public class Pacman extends Entidad {
 
 	@Override
 	public void resetearPosicion() {
-		// TODO Auto-generated method stub
 		super.getPosicion().cambiar(16, 20);
 		super.setAngulo(Direccion.LEFT);
 		super.setVelocidadEnMs(900);

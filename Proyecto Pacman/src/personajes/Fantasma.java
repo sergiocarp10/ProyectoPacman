@@ -17,8 +17,10 @@ public abstract class Fantasma extends Entidad {
 	private int color;
 	private boolean estaEnCasa = true;
 	
+	/**
+	 * Constructor por defecto, sin parámetros
+	 */
 	public Fantasma() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
@@ -115,16 +117,17 @@ public abstract class Fantasma extends Entidad {
 	 * el objetivo o hacia la esquina asignada según corresponda
 	 */
 	public void moverSegunModo() {
-		Posicion posBuscaLlegar;
-		
-		// A MODO DE EJEMPLO
-		if (this.getModo() == ModoJuego.ASUSTADO || this.getModo() == ModoJuego.DISPERSION) {
-			posBuscaLlegar = this.esqAsignada;
-		} else posBuscaLlegar = this.objetivo;
-		
-		// analizar hacia que direccion conviene moverse segun posBuscaLlegar
-		Direccion dirConveniente = Direccion.UP;	// a modo de ejemplo
-		super.intentarMov(dirConveniente);
+		/*
+		 * Posicion posBuscaLlegar;
+		 * 
+		 * // A MODO DE EJEMPLO if (this.getModo() == ModoJuego.ASUSTADO ||
+		 * this.getModo() == ModoJuego.DISPERSION) { posBuscaLlegar = this.esqAsignada;
+		 * } else posBuscaLlegar = this.objetivo;
+		 * 
+		 * // analizar hacia que direccion conviene moverse segun posBuscaLlegar
+		 * Direccion dirConveniente = Direccion.UP; // a modo de ejemplo
+		 * super.intentarMov(dirConveniente);
+		 */
 	}
 	
 	
@@ -157,7 +160,7 @@ public abstract class Fantasma extends Entidad {
 	 * @param y el valor de la posible ordenada (eje Y)
 	 */
 	protected void cambiarObjetivo(int x, int y) {
-		this.esqAsignada.cambiar(x, y);
+		this.objetivo.cambiar(x, y);
 	}
 	
 	/**

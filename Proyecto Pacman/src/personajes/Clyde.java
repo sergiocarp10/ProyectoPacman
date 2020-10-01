@@ -14,20 +14,24 @@ public class Clyde extends Fantasma {
 	private static final int MIN_PORCE = 33, DELAY = 20;
 	private int movUntilNextTarget;
 	
+	/**
+	 * Constructor por defecto, sin parámetros
+	 */
 	public Clyde() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
+	/**
+	 * Constructor que permite referenciar el tablero del cual consultar las celdas
+	 * @param tablero la instancia del tablero utilizada por la partida y el resto de personajes
+	 */
 	public Clyde(Tablero tablero) {
 		super(tablero, null, 2);
-		// TODO Auto-generated constructor stub
 		this.movUntilNextTarget = DELAY;
 	}
 	
 	@Override
 	public void resetearPosicion() {
-		// TODO Auto-generated method stub
 		super.setEstaEnCasa(true);
 		super.setModo(ModoJuego.PERSECUCION);
 		super.setAngulo(Direccion.UP);
